@@ -9,3 +9,8 @@ div.job-item {
 .row.job-info, .row.job-task {
   padding: 5px;
 }
+
+button.btn.btn-primary, button.btn.btn-default {
+  margin-left: 20px;
+  margin-top: 10px;
+}

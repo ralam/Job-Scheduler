@@ -1,32 +1,51 @@
-<form name="newJob" novalidate>
-  <div class="form-group">
-    <label for="task">Task</label>
-    <input name="task" ng-model="job.task" type="text" required></input>
-  </div>
-  <div class="form-group">
-    <label for="dyno-size">Dyno Size</label>
-    <select name="dyno-size" ng-model="job.dynoSize">
-      <option value="Free">Free</option>
-      <option value="Hobby">Hobby</option>
-      <option value="Standard">Standard</option>
-    </select>
-    <label for="frequency">Frequency</label>
-    <span ng-controller='FrequencyCtrl'>
-      <select name="frequency" ng-model="job.frequency"
-              ng-options="option for option in frequencyOptions"
-              ng-change="getOptions()">
-      </select>
+<ul class='new-job list-unstyled'>
+  <li>
+    <div class="job-item">
+      <form name="newJob" novalidate>
+        <div class="form-group">
+          <div class="col-md-12">
+            <div class="input-group">
+              <div class="input-group-addon">$</div>
+              <input type="text" class="form-control" ng-model="job.task" required></input>
+            </div>
+          </div>
+        </div>
 
-    <label>Last Run:</label>
-    <span>Never</span>
-    <label for="next-due">Next Due</label>
-    <select name="next-due" ng-model="job.nextDue"
-            ng-options="option for option in nextDueOptions">
-    </select>
-  </span>
-  </div>
-  <div class="form-group">
-  <button class="submit btn btn-primary" ng-click="save(job)">Save</button>
-  <button class="cancel btn btn-default" ng-click="cancel()">Cancel</button>
-  </div>
-</form>
+        <div class="form-group">
+          <div class="col-md-3">
+            <h4>Dyno Size:</h4>
+            <select name="dyno-size" ng-model="job.dynoSize">
+              <option value="Free">Free</option>
+              <option value="Hobby">Hobby</option>
+              <option value="Standard">Standard</option>
+            </select>
+          </div>
+          <span ng-controller='FrequencyCtrl'>
+            <div class="col-md-3">
+              <h4>Frequency</h4>
+
+                <select name="frequency" ng-model="job.frequency"
+                        ng-options="option for option in frequencyOptions"
+                        ng-change="getOptions()">
+                </select>
+            </div>
+            <div class="col-md-3">
+              <h4>Last Run</h4>
+              Never
+            </div>
+            <div class="col-md-3">
+              <h4>Next Due</h4>
+              <select name="next-due" ng-model="job.nextDue"
+                      ng-options="option for option in nextDueOptions">
+              </select>
+            </div>
+          </span>
+        </div>
+        <div class="form-group">
+          <button class="submit btn btn-primary" ng-click="save(job)">Save</button>
+          <button class="cancel btn btn-default" ng-click="cancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </li>
+</ul>
