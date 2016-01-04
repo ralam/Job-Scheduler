@@ -30,6 +30,12 @@
       $scope.newJob.$setUntouched();
       $scope.job = {};
     };
+
+    $scope.cancel = function(job){
+      $scope.newJob.$setPristine();
+      $scope.newJob.$setUntouched();
+      $scope.job = {};
+    };
   }]);
 
   jobSchedulerControllers.controller('FrequencyCtrl', function($scope) {

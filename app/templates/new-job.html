@@ -1,4 +1,4 @@
-<form name="newJob" ng-submit="save(job)" novalidate>
+<form name="newJob" novalidate>
   <label for="task">Task</label>
   <input name="task" ng-model="job.task" type="text" required></input>
   <label for="dyno-size">Dyno Size</label>
@@ -22,6 +22,6 @@
   </select>
   </div>
 
-  <input type="submit" class="btn btn-default" value="Save" />
-  <button class="cancel">Cancel</button>
+  <button class="sumbtin" ng-click="save(job)">Save</button>
+  <button class="cancel" ng-click="cancel()">Cancel</button>
 </form>
