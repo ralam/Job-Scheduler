@@ -1,16 +1,17 @@
-(function 9) {
+(function () {
   'use strict';
 
   // Declare app level module which depends on views, and components
-  var jobScheduler = angular.module('myApp', [
+  var jobScheduler = angular.module('jobScheduler', [
     'ngRoute',
     'jobSchedulerControllers'
-  ]).
-  config(['$routeProvider', function($routeProvider) {
+  ]);
+
+  jobScheduler.config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/index'});
   }]);
 
-  statusApp.directive('jobsList', function () {
+  jobScheduler.directive('jobsList', function () {
     return {
       restrict: 'E',
       templateUrl: './templates/jobs-list.html'
