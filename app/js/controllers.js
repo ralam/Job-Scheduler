@@ -25,6 +25,10 @@
         'nextDue': nextDue};
       $scope.jobs.push(job);
       $http.post('jobs/jobs.json', JSON.stringify($scope.jobs));
+
+      $scope.newJob.$setPristine();
+      $scope.newJob.$setUntouched();
+      $scope.job = {};
     };
   }]);
 
