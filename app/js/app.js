@@ -17,4 +17,11 @@
       templateUrl: './templates/jobs-list.html'
     };
   });
+
+  jobScheduler.directive('newJob', function () {
+    return {
+      restrict: 'E',
+      templateUrl: './templates/new-job.html'
+    };
+  });
 })();

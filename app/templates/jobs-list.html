@@ -1,2 +1,9 @@
 <ul class="jobs-list">
+  <li class="job-item" ng-repeat="job in jobs">
+    <p>Task: {{job.task}}</p>
+    <p>Dyno Size: {{job.dynoSize}}</p>
+    <p>Frequency: {{job.frequency}}</p>
+    <p>Last Run: {{job.lastRun}}</p>
+    <p>Next Due: {{job.nextDue | date: 'yyyy-MM-dd HH:mm'}}</p>
+  </li>
 </ul>
