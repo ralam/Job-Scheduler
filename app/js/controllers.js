@@ -3,6 +3,42 @@
 
   var jobSchedulerControllers = angular.module('jobSchedulerControllers', []);
 
+  /* controllers */
+
+  jobSchedulerControllers.controller('JobListCtrl', ['$scope', '$http',
+  function($scope, $http) {
+    $http.get('jobs/jobs.json').success(function(data) {
+      $scope.jobs = data;
+    });
+
+    $scope.save = function(job){
+      var nextDue = job.nextDue;
+      var job;
+
+      nextDue = parseTime(nextDue);
+
+      job = {
+        'task': job.task,
+        'dynoSize': job.dynoSize,
+        'frequency': job.frequency,
+        'lastRun': 'never',
+        'nextDue': nextDue};
+      $scope.jobs.push(job);
+      $http.post('jobs/jobs.json', JSON.stringify($scope.jobs));
+    };
+  }]);
+
+  jobSchedulerControllers.controller('FrequencyCtrl', function($scope) {
+    $scope.nextDueOptions = [];
+    $scope.frequencyOptions = ['Daily', 'Hourly', 'Every 10 minutes'];
+    $scope.nextDueValues = [hourGenerator(), minuteGenerator(), [tenMinutesFromNow()]];
+    $scope.getOptions = function(){
+      var idx = $scope.frequencyOptions.indexOf($scope.job.frequency);
+      $scope.nextDueOptions = $scope.nextDueValues[idx];
+    }
+  });
+
+
   /* helper methods to generate values used in controllers */
   var hourGenerator = function(){
     var hours = [];
@@ -36,37 +72,28 @@
     timeNow.setMinutes(timeNow.getMinutes() + 10);
     plusTenMinutes = new Date(timeNow);
     return plusTenMinutes;
-  }
+  };
 
-  /* controllers */
+  var parseTime = function(nextDue) {
+    var nextDueDate, minutes, hours;
+    if (typeof nextDue === 'string') {
+      nextDueDate = new Date();
+      if (nextDue.length === 3) {
+        minutes = parseInt(nextDue.slice(1));
+        nextDueDate.setMinutes(minutes);
+      } else {
+        hours = nextDue.slice(0, 2);
+        minutes = nextDue.slice(3);
+        nextDueDate.setMinutes(minutes);
+        nextDueDate.setHours(hours);
+        nextDueDate.setDate(nextDueDate.getDate() + 1);
+        nextDueDate = new Date(nextDueDate);
+      };
 
-  jobSchedulerControllers.controller('JobListCtrl', ['$scope', '$http',
-  function($scope, $http) {
-    $http.get('jobs/jobs.json').success(function(data) {
-      $scope.jobs = data;
-    });
-
-    $scope.save = function(job){
-      var job = {
-        'task': job.task,
-        'dynoSize': job.dynoSize,
-        'frequency': job.frequency,
-        'lastRun': 'never',
-        'nextDue': job.nextDue};
-      $scope.jobs.unshift(job);
-      $http.post('jobs/jobs.json', JSON.stringify($scope.jobs));
-    }
-  }]);
-
-  jobSchedulerControllers.controller('FrequencyCtrl', function($scope) {
-    $scope.nextDueOptions = [];
-    $scope.frequencyOptions = ['Daily', 'Hourly', 'Every 10 minutes'];
-    $scope.nextDueValues = [hourGenerator(), minuteGenerator(), [tenMinutesFromNow()]];
-    $scope.getOptions = function(){
-      var idx = $scope.frequencyOptions.indexOf($scope.job.frequency);
-      $scope.nextDueOptions = $scope.nextDueValues[idx];
-    }
-  });
+      nextDue = nextDueDate;
+    };
+    return nextDue;
+  };
 })();
 
 var hours = "00";
