@@ -4,4 +4,11 @@
   "frequency": "Daily",
   "lastRun": "never",
   "nextDue": "2012-04-23T18:25:43.511Z"
+},
+{
+  "task": "Test 2",
+  "dynoSize": "Free",
+  "frequency": "Daily",
+  "lastRun": "never",
+  "nextDue": "2012-04-23T18:25:43.511Z"
 }]

@@ -1,0 +1,29 @@
+<form name="new-job" ng-submit="statusUpdate.$valid && addJob(job)" ng-controller='NewJobCtrl' novalidate>
+  <label for="task">Task</label>
+  <input name="task" ng-model="job.task" type="text" required></input>
+  <label for="dyno-size">Dyno Size</label>
+  <select name="dyno-size" ng-model="job.dynoSize">
+    <option value="Free">Free</option>
+    <option value="Hobby">Hobby</option>
+    <option value="Standard">Standard</option>
+  </select>
+  <label for="frequency">Frequency</label>
+  <div ng-controller='FrequencyCtrl'>
+    <select name="frequency" ng-model="job.frequency"
+            ng-options="option.frequency for option in options"
+            ng-change="getOptions()">
+    </select>
+
+  <label>Last Run:</label>
+  <span>Never</span>
+  <label for="next-due">Next Due</label>
+  <select name="next-due" ng-model="job.nextDue">
+    <option ng-show="job.frequency === 'Daily'" value="Daily">Daily</option>
+    <option value="Hourly">Hourly</option>
+    <option value="Every 10 minutes">Every 10 minutes</option>
+  </select>
+  </div>
+
+  <input type="submit" class="btn btn-default" value="Save" />
+  <button class="cancel">Cancel</button>
+</form>
