@@ -9,4 +9,11 @@
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/index'});
   }]);
+
+  statusApp.directive('jobsList', function () {
+    return {
+      restrict: 'E',
+      templateUrl: './templates/jobs-list.html'
+    };
+  });
 }
