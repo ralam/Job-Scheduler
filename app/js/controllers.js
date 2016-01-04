@@ -3,7 +3,11 @@
 
   var jobSchedulerControllers = angular.module('jobSchedulerControllers', []);
 
-  jobSchedulerControllers.controller('')
+  jobSchedulerControllers.controller('JobListCtrl', ['$scope', 'Job',
+    function($scope, Job){
+      $scope.jobs= Job.query();
+    }
+  ]);
 
 
-})
+})();

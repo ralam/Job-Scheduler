@@ -16,4 +16,4 @@
       templateUrl: './templates/jobs-list.html'
     };
   });
-}
+})();
