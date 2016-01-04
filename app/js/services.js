@@ -5,7 +5,7 @@
 
   jobSchedulerServices.factory('Job',  ['$resource',
     function($resource){
-      return $resource('jobs.json', {}, {
+      return $resource('jobs/jobs.json', {}, {
         query: {method: 'GET', isArray:true}
       });
     }
