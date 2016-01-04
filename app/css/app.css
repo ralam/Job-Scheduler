@@ -1,4 +1,11 @@
 div.job-item {
   margin-top: 10px;
   margin-bottom: 10px;
+  padding: 5px;
+  border: 1px #aaaaaa solid;
+  border-radius: 3px;
+}
+
+.row.job-info, .row.job-task {
+  padding: 5px;
 }

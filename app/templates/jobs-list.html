@@ -2,27 +2,28 @@
   <li ng-repeat="job in jobs | orderBy:'nextDue'">
     <div class="job-item">
       <div class="row job-task">
-        <div class="col-md-12">Task: {{job.task}}</div>
+        <div class="col-md-12">
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input type="text" class="form-control" disabled value="{{job.task}}"></input>
+          </div>
+        </div>
       </div>
       <div class="row job-info">
         <div class="col-md-3">
-          Dyno Size:
-          <br><br>
+          <h4>Dyno Size:</h4>
           {{job.dynoSize}}
         </div>
         <div class="col-md-3">
-          Frequency
-          <br><br>
+          <h4>Frequency</h4>
           {{job.frequency}}
         </div>
         <div class="col-md-3">
-          Last Run
-          <br><br>
+          <h4>Last Run</h4>
           {{job.lastRun}}
         </div>
         <div class="col-md-3">
-          Next Due
-          <br><br>
+          <h4>Next Due</h4>
           {{job.nextDue | date: 'yyyy-MM-dd HH:mm'}}
         </div>
       </div>
