@@ -1,6 +1,6 @@
 [{
   "task": "Test",
-  "dynoSize": "Free",
+  "dynoSize": "Hobby",
   "frequency": "Daily",
   "lastRun": "never",
   "nextDue": "2015-04-23T18:25:43.511Z"
