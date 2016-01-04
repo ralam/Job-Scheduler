@@ -1,10 +1,32 @@
-<ul class="jobs-list">
-  <li class="job-item" ng-repeat="job in jobs | orderBy:'nextDue'">
-    <p>Task: {{job.task}}</p>
-    <p>Dyno Size: {{job.dynoSize}}</p>
-    <p>Frequency: {{job.frequency}}</p>
-    <p>Last Run: {{job.lastRun}}</p>
-    <p>Next Due: {{job.nextDue | date: 'yyyy-MM-dd HH:mm'}}</p>
+<ul class="jobs-list list-unstyled">
+  <li ng-repeat="job in jobs | orderBy:'nextDue'">
+    <div class="job-item">
+      <div class="row job-task">
+        <div class="col-md-12">Task: {{job.task}}</div>
+      </div>
+      <div class="row job-info">
+        <div class="col-md-3">
+          Dyno Size:
+          <br><br>
+          {{job.dynoSize}}
+        </div>
+        <div class="col-md-3">
+          Frequency
+          <br><br>
+          {{job.frequency}}
+        </div>
+        <div class="col-md-3">
+          Last Run
+          <br><br>
+          {{job.lastRun}}
+        </div>
+        <div class="col-md-3">
+          Next Due
+          <br><br>
+          {{job.nextDue | date: 'yyyy-MM-dd HH:mm'}}
+        </div>
+      </div>
+    </div>
   </li>
 </ul>
 <new-job></new-job>
