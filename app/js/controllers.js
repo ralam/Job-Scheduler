@@ -45,6 +45,17 @@
     $http.get('jobs/jobs.json').success(function(data) {
       $scope.jobs = data;
     });
+
+    $scope.save = function(job){
+      var job = {
+        'task': job.task,
+        'dynoSize': job.dynoSize,
+        'frequency': job.frequency,
+        'lastRun': 'never',
+        'nextDue': job.nextDue};
+      $scope.jobs.unshift(job);
+      $http.post('jobs/jobs.json', JSON.stringify($scope.jobs));
+    }
   }]);
 
   jobSchedulerControllers.controller('FrequencyCtrl', function($scope) {
