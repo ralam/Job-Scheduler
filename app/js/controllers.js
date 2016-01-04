@@ -2,7 +2,8 @@
   'use strict';
 
   var jobSchedulerControllers = angular.module('jobSchedulerControllers', []);
-  /* helper functions to generate values used in controllers */
+
+  /* helper methods to generate values used in controllers */
   var hourGenerator = function(){
     var hours = [];
     var hour = 0;
@@ -46,10 +47,6 @@
     });
   }]);
 
-  jobSchedulerControllers.controller('NewJobCtrl', function($scope) {
-    $scope.date = new Date();
-    $scope.minutes = $scope.date.getMinutes();
-  });
   jobSchedulerControllers.controller('FrequencyCtrl', function($scope) {
     $scope.nextDueOptions = [];
     $scope.frequencyOptions = ['Daily', 'Hourly', 'Every 10 minutes'];
@@ -59,8 +56,6 @@
       $scope.nextDueOptions = $scope.nextDueValues[idx];
     }
   });
-
-
 })();
 
 var hours = "00";
