@@ -1,5 +1,8 @@
 <ul class='new-job list-unstyled'>
-  <li>
+  <li ng-hide="showForm">
+    <button class="btn btn-primary" ng-click="showForm=true">Add New Job</button>
+  </li>
+  <li ng-show="showForm">
     <div class="job-item">
       <form name="newJob" novalidate>
         <div class="form-group">
@@ -42,8 +45,8 @@
           </span>
         </div>
         <div class="form-group">
-          <button class="submit btn btn-primary" ng-click="save(job)">Save</button>
-          <button class="cancel btn btn-default" ng-click="cancel()">Cancel</button>
+          <button class="submit btn btn-primary" ng-click="save(job); showForm=false">Save</button>
+          <button class="cancel btn btn-default" ng-click="cancel(); showForm=false">Cancel</button>
         </div>
       </form>
     </div>
