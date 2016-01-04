@@ -3,7 +3,7 @@
 
   var jobSchedulerControllers = angular.module('jobSchedulerControllers', []);
   /* helper functions to generate values used in controllers */
-  var hourGenerator = function () {
+  var hourGenerator = function(){
     var hours = [];
     var hour = 0;
     while (hour < 25) {
@@ -19,7 +19,7 @@
     return hours;
   };
 
-  var minuteGenerator = function () {
+  var minuteGenerator = function(){
     var minutes = [];
     var minute = 1;
     while (minute < 7) {
@@ -28,6 +28,16 @@
     };
     return minutes
   };
+
+  var tenMinutesFromNow = function() {
+    var plusTenMinutes;
+    var timeNow = new Date();
+    timeNow.setMinutes(timeNow.getMinutes() + 10);
+    plusTenMinutes = new Date(timeNow);
+    return plusTenMinutes;
+  }
+
+  /* controllers */
 
   jobSchedulerControllers.controller('JobListCtrl', ['$scope', '$http',
   function($scope, $http) {
@@ -41,9 +51,13 @@
     $scope.minutes = $scope.date.getMinutes();
   });
   jobSchedulerControllers.controller('FrequencyCtrl', function($scope) {
-    var frequencyOptions = ['Daily', 'Hourly', 'Every 10 minutes'];
-    var nextDueOptions = [hourGenerator(), minuteGenerator(), [new Date()]];
-    $scope.options = [{'frequency': 'Daily'}, {'frequency': 'Hourly'}, {'frequency': 'Every 10 minutes'}];
+    $scope.nextDueOptions = [];
+    $scope.frequencyOptions = ['Daily', 'Hourly', 'Every 10 minutes'];
+    $scope.nextDueValues = [hourGenerator(), minuteGenerator(), [tenMinutesFromNow()]];
+    $scope.getOptions = function(){
+      var idx = $scope.frequencyOptions.indexOf($scope.job.frequency);
+      $scope.nextDueOptions = $scope.nextDueValues[idx];
+    }
   });
 
 

@@ -10,17 +10,15 @@
   <label for="frequency">Frequency</label>
   <div ng-controller='FrequencyCtrl'>
     <select name="frequency" ng-model="job.frequency"
-            ng-options="option.frequency for option in options"
+            ng-options="option for option in frequencyOptions"
             ng-change="getOptions()">
     </select>
 
   <label>Last Run:</label>
   <span>Never</span>
   <label for="next-due">Next Due</label>
-  <select name="next-due" ng-model="job.nextDue">
-    <option ng-show="job.frequency === 'Daily'" value="Daily">Daily</option>
-    <option value="Hourly">Hourly</option>
-    <option value="Every 10 minutes">Every 10 minutes</option>
+  <select name="next-due" ng-model="job.nextDue"
+          ng-options="option for option in nextDueOptions">
   </select>
   </div>
 
