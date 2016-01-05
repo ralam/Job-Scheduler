@@ -10,7 +10,9 @@ module.exports = function(config){
       'app/bower_components/angular-resources/angular-resources.js',
       'app/js/app.js',
       'app/js/**/*.js',
-      'unit-tests/**/*.js'
+      'unit-tests/**/*.js',
+
+      {pattern: 'unit-tests/mock/*.json', watched: true, servered: true, included: false}
     ],
 
     autoWatch : true,

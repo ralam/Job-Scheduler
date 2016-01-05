@@ -18,7 +18,6 @@
       nextDue = parseTime(nextDue);
 
       job = {
-        'id': $scope.jobs[$scope.jobs.length - 1]["id"] + 1,
         'task': job.task,
         'dynoSize': job.dynoSize,
         'frequency': job.frequency,
