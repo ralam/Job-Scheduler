@@ -1,4 +1,5 @@
 [{
+  "id": 1,
   "task": "Test",
   "dynoSize": "Hobby",
   "frequency": "Daily",
@@ -6,6 +7,7 @@
   "nextDue": "2015-04-23T18:25:43.511Z"
 },
 {
+  "id": 2,
   "task": "Test 2",
   "dynoSize": "Free",
   "frequency": "Daily",

@@ -18,6 +18,7 @@
       nextDue = parseTime(nextDue);
 
       job = {
+        'id': $scope.jobs[$scope.jobs.length - 1]["id"] + 1,
         'task': job.task,
         'dynoSize': job.dynoSize,
         'frequency': job.frequency,
@@ -26,6 +27,7 @@
       $scope.jobs.push(job);
       $http.post('jobs/jobs.json', JSON.stringify($scope.jobs));
 
+      // would normally be in sucess callback of $http
       $scope.newJob.$setPristine();
       $scope.newJob.$setUntouched();
       $scope.job = {};
@@ -35,6 +37,16 @@
       $scope.newJob.$setPristine();
       $scope.newJob.$setUntouched();
       $scope.job = {};
+    };
+
+    $scope.remove = function(idx) {
+      var jobToRemove = $scope.jobs[idx];
+
+      // placeholder delete, no backend to connect to
+      $http.delete('jobs/job.json' + jobToRemove.id);
+
+      // would normally be in a success callback from $http
+      $scope.jobs.splice(idx, 1);
     };
   }]);
 
