@@ -3,7 +3,7 @@
 describe('Job Scheduler controllers', function () {
   beforeEach(module('jobScheduler'));
 
-  describe('job controller', function () {
+  describe('job list controller', function () {
     var scope, ctrl, $httpBackend;
 
     beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
@@ -100,7 +100,7 @@ describe('Job Scheduler controllers', function () {
       expect(scope.newJob.$setUntouched).toHaveBeenCalled();
     });
 
-    it ("should delete jobs by index", function($controller) {
+    it ("should delete jobs by index", function() {
       $httpBackend.flush();
       scope.remove(1);
 
@@ -115,7 +115,7 @@ describe('Job Scheduler controllers', function () {
       );
     });
 
-    it ("should clear the job model on cancellation", function($controller) {
+    it ("should clear the job model on cancellation", function() {
       $httpBackend.flush();
       spyOn(scope.newJob, '$setPristine');
       spyOn(scope.newJob, '$setUntouched');
@@ -126,5 +126,25 @@ describe('Job Scheduler controllers', function () {
       expect(scope.newJob.$setUntouched).toHaveBeenCalled();
       expect(scope.job).toEqual({});
     });
+  });
+
+  describe('job list controller', function () {
+
+    it ("should populate the correct number of runtime options for daily and hourly choices", inject(function($controller) {
+
+      var scope = {},
+          ctrl = $controller('FrequencyCtrl', {$scope: scope});
+      expect(scope.nextDueValues.length).toEqual(3);
+
+      scope.job = {'frequency': 'Daily'}
+      scope.getOptions();
+      expect(scope.nextDueOptions.length).toEqual(50);
+      scope.job = {'frequency': 'Hourly'};
+      scope.getOptions();
+      expect(scope.nextDueOptions.length).toEqual(6);
+      scope.job = {'frequency': 'Every 10 minutes'};
+      scope.getOptions();
+      expect(scope.nextDueOptions.length).toEqual(1);
+    }));
   });
 });
