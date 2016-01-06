@@ -17,7 +17,7 @@
         <div class="form-group">
           <div class="col-md-3">
             <h4>Dyno Size:</h4>
-            <select name="dyno-size" ng-model="job.dynoSize" id='new-job-dyno'>
+            <select name="dyno-size" ng-model="job.dynoSize" id='new-job-dyno' required>
               <option value="Free">Free</option>
               <option value="Hobby">Hobby</option>
               <option value="Standard">Standard</option>
@@ -29,7 +29,7 @@
 
                 <select name="frequency" id="new-job-frequency" ng-model="job.frequency"
                         ng-options="option for option in frequencyOptions"
-                        ng-change="getOptions()">
+                        ng-change="getOptions()" required>
                 </select>
             </div>
             <div class="col-md-3">
@@ -39,13 +39,13 @@
             <div class="col-md-3">
               <h4>Next Due</h4>
               <select name="next-due" id="new-job-due" ng-model="job.nextDue"
-                      ng-options="option for option in nextDueOptions">
+                      ng-options="option for option in nextDueOptions" required>
               </select>
             </div>
           </span>
         </div>
         <div class="form-group">
-          <button class="submit btn btn-primary" id="new-job-submit" ng-click="save(job); showForm=false">Save</button>
+          <button class="submit btn btn-primary" id="new-job-submit" ng-click="newJob.$valid && save(job); showForm=false">Save</button>
           <button class="cancel btn btn-default" ng-click="cancel(); showForm=false">Cancel</button>
         </div>
       </form>

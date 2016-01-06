@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="job-item" ng-show="editing">
-      <form name="newJob" novalidate>
+      <form name="editJob" novalidate>
         <div class="form-group">
           <div class="col-md-12">
             <div class="input-group">
@@ -74,7 +74,7 @@
           </span>
         </div>
         <div class="form-group">
-          <button class="submit btn btn-primary edit-job-submit" ng-click="editing=false">Save</button>
+          <button class="submit btn btn-primary edit-job-submit" ng-click="editJob.$valid; save(job); editing=false">Save</button>
           <button class="cancel btn btn-default edit-job-cancel" ng-click="cancel(); editing=false">Cancel</button>
         </div>
       </form>

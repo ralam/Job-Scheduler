@@ -36,6 +36,18 @@ describe('job scheduler', function() {
       expect(element.all(by.className('frequency')).first().getText()).toEqual('Frequency\nDaily');
     });
 
+    it('fails validation if a job field is missing', function() {
+      var inputValue;
+
+      element(by.id('add-new-job')).click();
+      element(by.id('new-job-task')).sendKeys();
+      element(by.id('new-job-dyno')).sendKeys('Free');
+      element(by.id('new-job-frequency')).sendKeys('Daily');
+      element(by.id('new-job-due')).sendKeys('00:00');
+      element(by.id('new-job-submit')).click();
+      expect(element.all(by.className('job-item')).count()).toEqual(5);
+    });
+
     it('removes a job when the remove job button is clicked', function() {
       expect(element.all(by.className('job-item')).count()).toEqual(5);
       element.all(by.className('remove')).first().click();
