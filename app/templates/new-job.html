@@ -1,6 +1,6 @@
 <ul class='new-job list-unstyled'>
   <li ng-hide="showForm">
-    <button class="btn btn-primary" ng-click="showForm=true">Add New Job</button>
+    <button class="btn btn-primary" id="add-new-job" ng-click="showForm=true">Add New Job</button>
   </li>
   <li ng-show="showForm">
     <div class="job-item">
@@ -9,7 +9,7 @@
           <div class="col-md-12">
             <div class="input-group">
               <div class="input-group-addon">$</div>
-              <input type="text" class="form-control" ng-model="job.task" required></input>
+              <input type="text" class="form-control" id="new-job-task" ng-model="job.task" required></input>
             </div>
           </div>
         </div>
@@ -17,7 +17,7 @@
         <div class="form-group">
           <div class="col-md-3">
             <h4>Dyno Size:</h4>
-            <select name="dyno-size" ng-model="job.dynoSize">
+            <select name="dyno-size" ng-model="job.dynoSize" id='new-job-dyno'>
               <option value="Free">Free</option>
               <option value="Hobby">Hobby</option>
               <option value="Standard">Standard</option>
@@ -27,7 +27,7 @@
             <div class="col-md-3">
               <h4>Frequency</h4>
 
-                <select name="frequency" ng-model="job.frequency"
+                <select name="frequency" id="new-job-frequency" ng-model="job.frequency"
                         ng-options="option for option in frequencyOptions"
                         ng-change="getOptions()">
                 </select>
@@ -38,14 +38,14 @@
             </div>
             <div class="col-md-3">
               <h4>Next Due</h4>
-              <select name="next-due" ng-model="job.nextDue"
+              <select name="next-due" id="new-job-due" ng-model="job.nextDue"
                       ng-options="option for option in nextDueOptions">
               </select>
             </div>
           </span>
         </div>
         <div class="form-group">
-          <button class="submit btn btn-primary" ng-click="save(job); showForm=false">Save</button>
+          <button class="submit btn btn-primary" id="new-job-submit" ng-click="save(job); showForm=false">Save</button>
           <button class="cancel btn btn-default" ng-click="cancel(); showForm=false">Cancel</button>
         </div>
       </form>
