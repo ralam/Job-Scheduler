@@ -29,6 +29,10 @@ describe('Job Scheduler controllers', function () {
 
       scope = $rootScope.$new();
       ctrl = $controller('JobListCtrl', {$scope: scope});
+      scope.newJob = {
+        $setPristine: function() {},
+        $setUntouched: function() {}
+      };
     }));
 
     it ('should create an array of "jobs" with two jobs fetched from xhr', function() {
@@ -63,10 +67,9 @@ describe('Job Scheduler controllers', function () {
         nextDue: baseTime
       };
       $httpBackend.flush();
-      scope.newJob = {
-        $setPristine: function() {},
-        $setUntouched: function() {}
-      };
+      spyOn(scope.newJob, '$setPristine');
+      spyOn(scope.newJob, '$setUntouched');
+      //currently fails when POST times out because there is no backend
       scope.save(job);
 
       expect(scope.jobs).toEqual(
@@ -93,6 +96,8 @@ describe('Job Scheduler controllers', function () {
         }]
       );
 
+      expect(scope.newJob.$setPristine).toHaveBeenCalled();
+      expect(scope.newJob.$setUntouched).toHaveBeenCalled();
     });
 
     it ("should delete jobs by index", function($controller) {
@@ -108,6 +113,18 @@ describe('Job Scheduler controllers', function () {
           nextDue: "2018-01-11T09:34:22.511Z"
         }]
       );
+    });
+
+    it ("should clear the job model on cancellation", function($controller) {
+      $httpBackend.flush();
+      spyOn(scope.newJob, '$setPristine');
+      spyOn(scope.newJob, '$setUntouched');
+      scope.cancel();
+
+      expect(scope.jobs.length).toEqual(2);
+      expect(scope.newJob.$setPristine).toHaveBeenCalled();
+      expect(scope.newJob.$setUntouched).toHaveBeenCalled();
+      expect(scope.job).toEqual({});
     });
   });
 });
