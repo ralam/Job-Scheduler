@@ -18,7 +18,8 @@ describe('job scheduler', function() {
   });
 
   describe('jobs list', function () {
-    it ('updates the page after adding a job', function() {
+
+    it('updates the page after adding a job', function() {
       var inputValue = '';
       element(by.id('add-new-job')).click();
       element(by.id('new-job-task')).sendKeys('rake db:drop');
@@ -30,6 +31,24 @@ describe('job scheduler', function() {
         function(value) {
           expect(value).toEqual('rake db:drop');
         });
+    });
+
+    it('removes a job when the remove job button is clicked', function() {
+      expect(element.all(by.className('job-item')).count()).toEqual(5);
+      element.all(by.className('remove')).first().click();
+      expect(element.all(by.className('job-item')).count()).toEqual(3);
+    });
+
+    it('updates the values for a job when edited', function() {
+      element.all(by.className('edit')).first().click();
+      element.all(by.className('edit-job-task')).first().clear().sendKeys('rake db:drop');
+      element.all(by.className('edit-job-dyno')).first().sendKeys('Hobby');
+      element.all(by.className('edit-job-submit')).first().click();
+      element.all(by.className('job-task')).get(1).getAttribute('value').then(
+        function(value) {
+          expect(value).toEqual('rake db:drop');
+        });
+      expect(element.all(by.className('dyno-size')).get(1).getText()).toEqual('Dyno Size:\nHobby');
     });
   });
 
