@@ -20,7 +20,8 @@ describe('job scheduler', function() {
   describe('jobs list', function () {
 
     it('updates the page after adding a job', function() {
-      var inputValue = '';
+      var inputValue;
+
       element(by.id('add-new-job')).click();
       element(by.id('new-job-task')).sendKeys('rake db:drop');
       element(by.id('new-job-dyno')).sendKeys('Free');
@@ -31,6 +32,8 @@ describe('job scheduler', function() {
         function(value) {
           expect(value).toEqual('rake db:drop');
         });
+      expect(element.all(by.className('dyno-size')).first().getText()).toEqual('Dyno Size:\nFree');
+      expect(element.all(by.className('frequency')).first().getText()).toEqual('Frequency\nDaily');
     });
 
     it('removes a job when the remove job button is clicked', function() {
