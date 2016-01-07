@@ -1,6 +1,6 @@
 # Job Scheduler
 
-Front-end clone of [Heroku Scheduler][1]. To start the server locally, run
+Front-end clone of [Heroku Scheduler][1]. To start the server locally, clone this repo and run
 ```
 npm install
 npm start
