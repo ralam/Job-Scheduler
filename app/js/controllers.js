@@ -8,9 +8,6 @@
   jobSchedulerControllers.controller('JobListCtrl', ['$scope', 'Job', 'timeService',
   function($scope, Job, timeService) {
     $scope.jobs = Job.query();
-    // $http.get('jobs/jobs.json').success(function(data) {
-    //   $scope.jobs = data;
-    // });
 
     $scope.save = function(job){
       var nextDue = job.nextDue;
@@ -24,9 +21,10 @@
         'frequency': job.frequency,
         'lastRun': 'never',
         'nextDue': nextDue};
-      $scope.jobs.push(job);
       Job.save(job);
 
+      // push job onto $scope.jobs because there is no backend
+      $scope.jobs.push(job);
       $scope.newJob.$setPristine();
       $scope.newJob.$setUntouched();
       $scope.job = {};
@@ -41,10 +39,10 @@
     $scope.remove = function(idx) {
       var jobToRemove = $scope.jobs[idx];
 
-      // placeholder delete, no backend to connect to
-      $http.delete('jobs/job.json' + jobToRemove.id);
+      // placeholder delete, no id to use in ngResource
+      $http.delete('jobs/job.json');
 
-      // would normally be in a success callback from $http
+      // splice job from $scope.jobs because there is no backend
       $scope.jobs.splice(idx, 1);
     };
   }]);
