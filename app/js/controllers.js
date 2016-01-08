@@ -5,8 +5,8 @@
 
   /* controllers */
 
-  jobSchedulerControllers.controller('JobListCtrl', ['$scope', 'Job', 'timeService',
-  function($scope, Job, timeService) {
+  jobSchedulerControllers.controller('JobListCtrl', ['$scope', 'Job', 'timeService', '$http',
+  function($scope, Job, timeService, $http) {
     $scope.jobs = Job.query();
 
     $scope.save = function(job){

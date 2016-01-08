@@ -1,6 +1,7 @@
 'use strict';
 
 describe('Job Scheduler controllers', function () {
+
   beforeEach(module('jobScheduler'));
   beforeEach(module('jobSchedulerServices'));
 
@@ -37,10 +38,10 @@ describe('Job Scheduler controllers', function () {
     }));
 
     it ('should create an array of "jobs" with two jobs fetched from xhr', function() {
-      expect(scope.jobs).toBeUndefined();
+      expect(JSON.stringify(scope.jobs)).toEqual(JSON.stringify([]));
       $httpBackend.flush();
 
-      expect(scope.jobs).toEqual(
+      expect(JSON.stringify(scope.jobs)).toEqual(JSON.stringify(
         [{
           task: "Test",
           dynoSize: "Free",
@@ -54,7 +55,7 @@ describe('Job Scheduler controllers', function () {
           frequency: "Hobby",
           lastRun: "never",
           nextDue: "2017-11-23T18:22:40.511Z"
-        }]
+        }])
       );
     });
 
@@ -73,7 +74,7 @@ describe('Job Scheduler controllers', function () {
       //currently fails when POST times out because there is no backend
       scope.save(job);
 
-      expect(scope.jobs).toEqual(
+      expect(JSON.stringify(scope.jobs)).toEqual(JSON.stringify(
         [{
           task: "Test",
           dynoSize: "Free",
@@ -94,7 +95,7 @@ describe('Job Scheduler controllers', function () {
           frequency: "Daily",
           lastRun: "never",
           nextDue: baseTime
-        }]
+        }])
       );
 
       expect(scope.newJob.$setPristine).toHaveBeenCalled();
@@ -105,14 +106,14 @@ describe('Job Scheduler controllers', function () {
       $httpBackend.flush();
       scope.remove(1);
 
-      expect(scope.jobs).toEqual(
+      expect(JSON.stringify(scope.jobs)).toEqual(JSON.stringify(
         [{
           task: "Test",
           dynoSize: "Free",
           frequency: "Daily",
           lastRun: "never",
           nextDue: "2018-01-11T09:34:22.511Z"
-        }]
+        }])
       );
     });
 
