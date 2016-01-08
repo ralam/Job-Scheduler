@@ -132,21 +132,11 @@ describe('Job Scheduler controllers', function () {
 
   describe('job list controller', function () {
 
-    it ("should populate the correct number of runtime options for daily and hourly choices", inject(function($controller) {
+    it ("should populate the correct number of options", inject(function($controller) {
 
       var scope = {},
           ctrl = $controller('FrequencyCtrl', {$scope: scope});
       expect(scope.nextDueValues.length).toEqual(3);
-
-      scope.job = {'frequency': 'Daily'}
-      scope.getOptions();
-      expect(scope.nextDueOptions.length).toEqual(50);
-      scope.job = {'frequency': 'Hourly'};
-      scope.getOptions();
-      expect(scope.nextDueOptions.length).toEqual(6);
-      scope.job = {'frequency': 'Every 10 minutes'};
-      scope.getOptions();
-      expect(scope.nextDueOptions.length).toEqual(1);
     }));
   });
 });
