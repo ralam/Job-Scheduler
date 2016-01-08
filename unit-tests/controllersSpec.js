@@ -2,6 +2,7 @@
 
 describe('Job Scheduler controllers', function () {
   beforeEach(module('jobScheduler'));
+  beforeEach(module('jobSchedulerServices'));
 
   describe('job list controller', function () {
     var scope, ctrl, $httpBackend;

@@ -4,7 +4,8 @@
   // Declare app level module which depends on views, and components
   var jobScheduler = angular.module('jobScheduler', [
     'ngRoute',
-    'jobSchedulerControllers'
+    'jobSchedulerControllers',
+    'jobSchedulerServices'
   ]);
 
   jobScheduler.config(['$routeProvider', function($routeProvider) {
